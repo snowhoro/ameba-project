@@ -1,0 +1,11 @@
+C:\Users\Luciano\Documents\Cuarto Cuatrimestre\Desarrollo\Ameba\Temp\bin\Debug\Assembly-CSharp.dll
+C:\Users\Luciano\Documents\Cuarto Cuatrimestre\Desarrollo\Ameba\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\Users\Luciano\Documents\Cuarto Cuatrimestre\Desarrollo\Ameba\Temp\bin\Debug\UnityEditor.dll
+C:\Users\Luciano\Documents\Cuarto Cuatrimestre\Desarrollo\Ameba\Temp\bin\Debug\UnityEngine.dll
+C:\Users\Luciano\Documents\Cuarto Cuatrimestre\Desarrollo\Ameba\Temp\bin\Debug\Mono.Cecil.dll
+C:\Users\Luciano\Documents\Cuarto Cuatrimestre\Desarrollo\Ameba\Temp\bin\Debug\nunit.framework.dll
+C:\Users\Luciano\Documents\Cuarto Cuatrimestre\Desarrollo\Ameba\Temp\bin\Debug\Unity.DataContract.dll
+C:\Users\Luciano\Documents\Cuarto Cuatrimestre\Desarrollo\Ameba\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\Users\Luciano\Documents\Cuarto Cuatrimestre\Desarrollo\Ameba\obj\Debug\Assembly-CSharp-vs.csprojResolveAssemblyReference.cache
+C:\Users\Luciano\Documents\Cuarto Cuatrimestre\Desarrollo\Ameba\obj\Debug\Assembly-CSharp.dll
+C:\Users\Luciano\Documents\Cuarto Cuatrimestre\Desarrollo\Ameba\obj\Debug\Assembly-CSharp.pdb
