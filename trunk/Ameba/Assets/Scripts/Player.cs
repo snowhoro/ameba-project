@@ -120,20 +120,23 @@ public class Player : Base
     {
         anim.SetFloat("MoveX", moveX);
         anim.SetFloat("MoveY", moveY);
-        /*
-        if (faceDir.x != 0)
-            anim.SetFloat("MoveX", moveX);
-        else if (faceDir.y != 0)
-            anim.SetFloat("MoveY", moveY);*/
     }
 
     public void Attack()
     {
 		if (Input.GetKeyDown (KeyCode.LeftControl)) 
 		{
-			// CAMBIA ESTO CACA
-			Combat.instance.DealDamage(GameObject.FindGameObjectWithTag("Enemy").GetComponent<Base>(),this);
-			Turns.instance.EndTurn (this);
+			RaycastHit2D[] hits;
+			hits = Physics2D.RaycastAll(transform.position, faceDir , 1.0f);
+			bool wall = false;
+			foreach (RaycastHit2D hit in hits)
+			{
+				if (hit.collider.tag == "Enemy" && !hit.collider.isTrigger)
+				{
+					Combat.instance.DealDamage(hit.collider.GetComponent<Base>(),this);
+					Turns.instance.EndTurn (this);
+				}
+			}
 		}
 
 

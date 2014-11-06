@@ -11,6 +11,12 @@ TextureImporter:
     21300012: ameba 1_6
     21300014: ameba 1_12
     21300016: ameba 1_13
+    21300018: ameba 1_27
+    21300020: ameba 1_28
+    21300022: ameba 1_29
+    21300024: ameba 1_30
+    21300026: ameba 1_31
+    21300028: ameba 1_32
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -60,7 +66,7 @@ TextureImporter:
         width: 611
         height: 373
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: ameba 1_1
       rect:
@@ -70,7 +76,7 @@ TextureImporter:
         width: 610
         height: 377
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: ameba 1_2
       rect:
@@ -80,7 +86,7 @@ TextureImporter:
         width: 611
         height: 377
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: ameba 1_3
       rect:
@@ -90,7 +96,7 @@ TextureImporter:
         width: 611
         height: 370
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: ameba 1_4
       rect:
@@ -100,7 +106,7 @@ TextureImporter:
         width: 611
         height: 373
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: ameba 1_5
       rect:
@@ -110,7 +116,7 @@ TextureImporter:
         width: 55
         height: 52
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: ameba 1_6
       rect:
@@ -120,7 +126,7 @@ TextureImporter:
         width: 132
         height: 131
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: ameba 1_12
       rect:
@@ -130,7 +136,7 @@ TextureImporter:
         width: 611
         height: 373
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: ameba 1_13
       rect:
@@ -140,7 +146,67 @@ TextureImporter:
         width: 613
         height: 373
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba 1_27
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 40
+        width: 500
+        height: 450
+      alignment: 9
+      pivot: {x: .282710314, y: .425072551}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba 1_28
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 40
+        width: 500
+        height: 450
+      alignment: 9
+      pivot: {x: .222768307, y: .400096714}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba 1_29
+      rect:
+        serializedVersion: 2
+        x: 1167
+        y: 40
+        width: 500
+        height: 450
+      alignment: 9
+      pivot: {x: .192797124, y: .391771436}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba 1_30
+      rect:
+        serializedVersion: 2
+        x: 1759
+        y: 40
+        width: 500
+        height: 450
+      alignment: 9
+      pivot: {x: .192797363, y: .383446157}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba 1_31
+      rect:
+        serializedVersion: 2
+        x: 2291
+        y: 40
+        width: 500
+        height: 450
+      alignment: 9
+      pivot: {x: .17781201, y: .375120878}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba 1_32
+      rect:
+        serializedVersion: 2
+        x: 2845
+        y: 40
+        width: 500
+        height: 450
+      alignment: 9
+      pivot: {x: .207783207, y: .325169206}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
