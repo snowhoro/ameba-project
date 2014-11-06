@@ -7,6 +7,7 @@ public class Player : Base
     public float moveSpeed = 10f;
     private float moveX;
     private float moveY;
+    private Vector2 faceDir;
 
     private bool moving = false;
     private bool attacking = false;
@@ -96,8 +97,11 @@ public class Player : Base
     }
     public void CheckNextStep()
     {
+        faceDir = new Vector2(moveX, moveY);
+        FaceDirection();
+
         RaycastHit2D[] hits;
-        hits = Physics2D.RaycastAll(transform.position, new Vector2(moveX, moveY), 1.0f);
+        hits = Physics2D.RaycastAll(transform.position, faceDir , 1.0f);
         bool wall = false;
         foreach (RaycastHit2D hit in hits)
         {
@@ -108,9 +112,19 @@ public class Player : Base
         if (!wall)
         {
             target = new Vector3(Position.x + moveX, Position.y + moveY, transform.position.z);
-            anim.SetFloat("MoveX", moveX);
             moving = true;
         }
+    }
+
+    private void FaceDirection()
+    {
+        anim.SetFloat("MoveX", moveX);
+        anim.SetFloat("MoveY", moveY);
+        /*
+        if (faceDir.x != 0)
+            anim.SetFloat("MoveX", moveX);
+        else if (faceDir.y != 0)
+            anim.SetFloat("MoveY", moveY);*/
     }
 
     public void Attack()
