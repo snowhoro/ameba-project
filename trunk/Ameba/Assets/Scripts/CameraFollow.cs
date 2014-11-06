@@ -10,7 +10,7 @@ public class CameraFollow : MonoBehaviour {
     void Update()
     {
         if (playerPos == null)
-            playerPos = GameObject.FindGameObjectWithTag("Player").transform;
+            playerPos = Player.instance.transform;
     }
 
 	void LateUpdate () 
