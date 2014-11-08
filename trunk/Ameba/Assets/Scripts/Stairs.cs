@@ -16,6 +16,6 @@ public class Stairs : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D coll)
 	{
 		//CAMBIAR ESTO!!!!!"!!!!!!!!!!!!!!!!!!
-		GameObject.FindGameObjectWithTag ("Dungeon").GetComponent<DungeonGenerator> ().NextMap ();
+		GameObject.FindGameObjectWithTag ("Dungeon").GetComponent<DungeonGenerator> ().GenerateDungeon ();
 	}
 }

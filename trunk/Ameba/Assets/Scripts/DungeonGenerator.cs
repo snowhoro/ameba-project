@@ -16,8 +16,8 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject prefab_floor;
     public GameObject prefab_door;
 	public GameObject prefab_stairs;
-    public GameObject player_ameba;
-    public GameObject pathfinding;
+    public GameObject prefab_player;
+    public GameObject prefab_pathfinder;
 
     public enum TileType
     {
@@ -48,7 +48,6 @@ public class DungeonGenerator : MonoBehaviour
     public TunnelType tunnelType;
 
     private GameObject player;
-    private GameObject pathfinder;
 	private GameObject stairs;
 
     private List<GameObject> tileList;
@@ -60,21 +59,29 @@ public class DungeonGenerator : MonoBehaviour
 
     void Start()
     {
-        CalcSize();
-        CreateDungeonMatrix();
-        CreateRooms();
-        Open_tunnel();
-        DrawDungeon();
-        SetPlayer();
-        GenEnemies();
+        GenerateDungeon();
     }
 
     void Update()
     {
         if(Input.GetKey(KeyCode.R))
         {
-            NextMap();
+            GenerateDungeon();
         }
+    }
+
+
+    public void GenerateDungeon()
+    {
+        CleanMap();
+        CalcSize();
+        CreateDungeonMatrix();
+        CreateRooms();
+        Open_tunnel();
+        DrawDungeon();
+        SetPlayer();
+        Pathfinding.instance.LoadPathfinder(dungeonMatrix, dungeonWidth, dungeonHeight);
+        GenerateEnemies();
     }
 
     private void CalcSize()
@@ -412,7 +419,9 @@ public class DungeonGenerator : MonoBehaviour
 
     private void DrawDungeon()
     {
-        pathfinder = (GameObject) GameObject.Instantiate(pathfinding, new Vector3(0, 0, 2), Quaternion.identity);
+        // INSTANCIO EL PATHFINDER
+        GameObject.Instantiate(prefab_pathfinder, new Vector3(0, 0, 2), Quaternion.identity);
+
         tileList = new List<GameObject>();
         for (int x = 0; x < dungeonWidth; x++)
         {
@@ -449,78 +458,32 @@ public class DungeonGenerator : MonoBehaviour
 
     public void SetPlayer()
     {
-        if (rooms[0] != null)
-            player = (GameObject)GameObject.Instantiate(player_ameba, new Vector3((int)rooms[0].center.x, (int)rooms[0].center.y, -1), Quaternion.identity);
-
-		if(rooms[rooms.Length-1] != null)
-			stairs = (GameObject)GameObject.Instantiate(prefab_stairs, new Vector3((int)rooms[rooms.Length-1].center.x, (int)rooms[rooms.Length-1].center.y, -1), Quaternion.identity);
+        if (player != null)
+        {
+            player.transform.position = new Vector3((int)rooms[0].center.x, (int)rooms[0].center.y, -1);
+            player.GetComponent<Player>().target = player.transform.position;
+            player.GetComponent<Player>().Position = player.transform.position;
+        }
+        else 
+        {
+            player = (GameObject)GameObject.Instantiate(prefab_player, new Vector3((int)rooms[0].center.x, (int)rooms[0].center.y, -1), Quaternion.identity);
+            stairs = (GameObject)GameObject.Instantiate(prefab_stairs, new Vector3((int)rooms[rooms.Length - 1].center.x, (int)rooms[rooms.Length - 1].center.y, -1), Quaternion.identity);
+        }
     }
 
-	public bool IsBlocked(Vector2 vec)
-	{
-		if (0 < vec.x && vec.x < dungeonWidth && 0 < vec.y && vec.y < dungeonHeight) 
-		{
-			return dungeonMatrix[(int) vec.x , (int) vec.y ].blocked;
-		}
-		return true;
-	}
+    //public bool IsBlocked(Vector2 vec)
+    //{
+    //    if (0 < vec.x && vec.x < dungeonWidth && 0 < vec.y && vec.y < dungeonHeight) 
+    //    {
+    //        return dungeonMatrix[(int) vec.x , (int) vec.y ].blocked;
+    //    }
+    //    return true;
+    //}
 
-    public void GenEnemies()
+    public void GenerateEnemies()
     {
        EnemyGenerator enemGen = GameObject.FindGameObjectWithTag("Enemies").GetComponent<EnemyGenerator>();
        enemGen.GenerateEnemies(rooms);
-    }
-
-    public void LoadNodes(List<Node> nodeList)
-    {
-        for (int x = 0; x < dungeonWidth; x++)
-        {
-            for (int y = 0; y < dungeonHeight; y++)
-            {
-                if (!dungeonMatrix[x, y].blocked)
-                {
-                    Node node = new Node();
-                    node.position = new Vector2(x, y);
-                    nodeList.Add(node);
-                }
-            }
-        }
-
-        foreach (Node node in nodeList)
-        {
-            node.nearNodes = new List<Node>();
-            for (int i = 0; i < nodeList.Count; i++)
-            {           
-                if (nodeList[i].position == node.position + new Vector2(1, 0))
-                    node.nearNodes.Add(nodeList[i]);
-                if (nodeList[i].position == node.position + new Vector2(-1, 0))
-                    node.nearNodes.Add(nodeList[i]);
-                if (nodeList[i].position == node.position + new Vector2(0, 1))
-                    node.nearNodes.Add(nodeList[i]);
-                if (nodeList[i].position == node.position + new Vector2(0, -1))
-                    node.nearNodes.Add(nodeList[i]);
-            }
-        }
-    }
-
-    public void NextMap()
-    {
-        CleanMap();
-        CalcSize();
-        CreateDungeonMatrix();
-        CreateRooms();
-        Open_tunnel();
-        DrawDungeon();
-        MovePlayer();
-        GenEnemies();
-        Pathfinding.instance.Reload();
-    }
-
-    private void MovePlayer()
-    {
-        player.transform.position = new Vector3((int)rooms[0].center.x, (int)rooms[0].center.y, -1);
-        player.GetComponent<Player>().target = player.transform.position;
-        player.GetComponent<Player>().Position = player.transform.position;
     }
 
     private void CleanMap()
@@ -528,9 +491,11 @@ public class DungeonGenerator : MonoBehaviour
         GameObject.FindGameObjectWithTag("Enemies").GetComponent<EnemyGenerator>().DeleteEnemies();
         Turns.instance.CleanTurnList();
 		Destroy (stairs);
-        foreach(GameObject tile in tileList)
+
+        if (tileList != null)
         {
-            Destroy(tile);
+            foreach (GameObject tile in tileList)
+                Destroy(tile);
         }
     }
 }

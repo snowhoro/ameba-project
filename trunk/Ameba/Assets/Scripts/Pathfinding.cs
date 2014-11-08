@@ -17,7 +17,6 @@ public class Pathfinding : MonoBehaviour {
 
                 DontDestroyOnLoad(_instance.gameObject);
             }
-
             return _instance;
         }
     }
@@ -36,19 +35,44 @@ public class Pathfinding : MonoBehaviour {
         }
     }
 
-    
-	void Start () 
-    {
-        Reload();
-	}
-
-    public void Reload()
+    public void LoadPathfinder(Tile[,] dungeonMatrix, int dungeonWidth, int dungeonHeight)
     {
         nodeList = new List<Node>();
-
-        //CAMBIAR ESTO!
-        GameObject.FindGameObjectWithTag("Dungeon").GetComponent<DungeonGenerator>().LoadNodes(nodeList);
+        LoadNodes(dungeonMatrix,dungeonWidth,dungeonHeight);
     }
+
+    public void LoadNodes(Tile[,] dungeonMatrix, int dungeonWidth,int dungeonHeight)
+    {
+        for (int x = 0; x < dungeonWidth; x++)
+        {
+            for (int y = 0; y < dungeonHeight; y++)
+            {
+                if (!dungeonMatrix[x, y].blocked)
+                {
+                    Node node = new Node();
+                    node.position = new Vector2(x, y);
+                    nodeList.Add(node);
+                }
+            }
+        }
+
+        foreach (Node node in nodeList)
+        {
+            node.nearNodes = new List<Node>();
+            for (int i = 0; i < nodeList.Count; i++)
+            {
+                if (nodeList[i].position == node.position + new Vector2(1, 0))
+                    node.nearNodes.Add(nodeList[i]);
+                if (nodeList[i].position == node.position + new Vector2(-1, 0))
+                    node.nearNodes.Add(nodeList[i]);
+                if (nodeList[i].position == node.position + new Vector2(0, 1))
+                    node.nearNodes.Add(nodeList[i]);
+                if (nodeList[i].position == node.position + new Vector2(0, -1))
+                    node.nearNodes.Add(nodeList[i]);
+            }
+        }
+    }
+
 
     public Vector2 NextStep(Vector2 target, Vector2 origin)
     {

@@ -29,14 +29,21 @@ public class Enemy : Base
         {
             moving = false;
             Position = transform.position;
-            Turns.instance.EndTurn(this);
+
+            
         }
 
-		if (HitPoints <= 1) {
-			Turns.instance.DeleteEnemy(this);
-						Destroy (this.gameObject);
+        if (HitPoints <= 1)
+        {
+            Turns.instance.DeleteEnemy(this);
+            Destroy(this.gameObject);
+        }
 
-				}
+        if (Stamina == 0)
+        {
+            Turns.instance.EndTurn(this);
+            Stamina = MaxStamina;
+        }
     }
 
     void FixedUpdate()
@@ -44,10 +51,13 @@ public class Enemy : Base
         transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
     }
 
-    public void Move()
+    public override void Move()
     {
-        if (!moving)
+        if (!moving && Stamina >= MoveCost)
         {
+            // COSTO DE MOVIMIENTO
+            Stamina -= MoveCost;
+
             nextStep = Pathfinding.instance.NextStep(Player.instance.Position, transform.position);
 
             if (nextStep != Vector2.zero)
@@ -59,34 +69,36 @@ public class Enemy : Base
         
     }
 
-    public void Attack()
+    public override void Attack()
     {
-		//MEJORAR
-        Vector2 playerPos = Player.instance.Position;
-		bool attk = false;
-        if (playerPos == (Vector2)transform.position + new Vector2(1, 0))
+        if (Stamina >= AttackCost)
         {
-			attk = true;
-        }
-        if (playerPos == (Vector2)transform.position + new Vector2(-1, 0))
-        {
-			attk = true;
-        }
-        if (playerPos == (Vector2)transform.position + new Vector2(0, 1))
-        {
-			attk = true;
-        }
-        if (playerPos == (Vector2)transform.position + new Vector2(0, -1))
-        {
-			attk = true;
-        }
+            //MEJORAR
+            Vector2 playerPos = Player.instance.Position;
+            bool attk = false;
+            if (playerPos == (Vector2)transform.position + new Vector2(1, 0))
+            {
+                attk = true;
+            }
+            if (playerPos == (Vector2)transform.position + new Vector2(-1, 0))
+            {
+                attk = true;
+            }
+            if (playerPos == (Vector2)transform.position + new Vector2(0, 1))
+            {
+                attk = true;
+            }
+            if (playerPos == (Vector2)transform.position + new Vector2(0, -1))
+            {
+                attk = true;
+            }
 
-		if (attk)
-		{
-			Base player = GameObject.FindGameObjectWithTag("Player").GetComponent<Base>();
-			print ("ATTACKING");
-			Combat.instance.DealDamage(player,this);
-		}
+            if (attk)
+            {
+                Stamina -= AttackCost;
+                Combat.DealDamage(Player.instance, this);
+            }
+        }
     }
 
 
