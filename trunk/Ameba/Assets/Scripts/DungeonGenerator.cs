@@ -17,7 +17,6 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject prefab_door;
 	public GameObject prefab_stairs;
     public GameObject prefab_player;
-    public GameObject prefab_pathfinder;
 
     public enum TileType
     {
@@ -67,9 +66,13 @@ public class DungeonGenerator : MonoBehaviour
         if(Input.GetKey(KeyCode.R))
         {
             GenerateDungeon();
+            CameraFade.StartAlphaFade(Color.black, true, 1f, 2f);            
+        }
+        if (Input.GetKey(KeyCode.F))
+        {
+            CameraFade.StartAlphaFade(Color.black, false, 0.5f, 1f, () => { GenerateDungeon(); });            
         }
     }
-
 
     public void GenerateDungeon()
     {
@@ -82,6 +85,8 @@ public class DungeonGenerator : MonoBehaviour
         SetPlayer();
         Pathfinding.instance.LoadPathfinder(dungeonMatrix, dungeonWidth, dungeonHeight);
         GenerateEnemies();
+
+        CameraFade.StartAlphaFade(Color.black, true, 0.5f, 1f);
     }
 
     private void CalcSize()
@@ -418,10 +423,7 @@ public class DungeonGenerator : MonoBehaviour
     }
 
     private void DrawDungeon()
-    {
-        // INSTANCIO EL PATHFINDER
-        GameObject.Instantiate(prefab_pathfinder, new Vector3(0, 0, 2), Quaternion.identity);
-
+    {    
         tileList = new List<GameObject>();
         for (int x = 0; x < dungeonWidth; x++)
         {
