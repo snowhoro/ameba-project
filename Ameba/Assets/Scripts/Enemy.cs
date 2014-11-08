@@ -9,10 +9,32 @@ public class Enemy : Base
     private Vector3 target;
     private Vector2 nextStep;
     private float moveSpeed = 3.0f;
+
+    private float left;
+    private float top;
+    public Texture2D blackBar;
+    public Texture2D redBar;
+    public float healthBarWidth;
+    public float healthBarHeight;
+
     void Start()
     {
         target = transform.position;
         moving = false;
+    }
+
+    void OnGUI()
+    {
+        
+        Vector3 healthBarWorldPosition = transform.position + new Vector3(0.0f, 0.5f, 0.0f);
+        Vector3 healthBarScreenPosition = Camera.main.WorldToScreenPoint(healthBarWorldPosition);
+
+        left = healthBarScreenPosition.x - (healthBarWidth / 2);
+        top = Screen.height - (healthBarScreenPosition.y);
+
+        GUI.DrawTexture(new Rect(left, top, healthBarWidth, healthBarHeight), blackBar, ScaleMode.StretchToFill);
+        GUI.DrawTexture(new Rect(left, top, (HitPoints * healthBarWidth) / MaxHitPoints, healthBarHeight), redBar, ScaleMode.StretchToFill);
+        
     }
 
     void Update()
@@ -29,8 +51,6 @@ public class Enemy : Base
         {
             moving = false;
             Position = transform.position;
-
-            
         }
 
         if (HitPoints <= 1)
