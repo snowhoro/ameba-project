@@ -66,8 +66,13 @@ public class Player : Base
         {
             moving = false;
             Position = transform.position;
-            anim.SetTrigger("BackToIdle");
+            Stamina -= MoveCost;
+        }
+
+        if (Stamina == 0)
+        {
             Turns.instance.EndTurn(this);
+            Stamina = MaxStamina;
         }
     }
 
@@ -78,21 +83,24 @@ public class Player : Base
 
 	public void SkipTurn()
 	{
-		if (Input.GetKeyDown(KeyCode.Space))
-			Turns.instance.EndTurn (this);
+        if (Input.GetKeyDown(KeyCode.Space))
+            Stamina = 0;
 	}
 
-    public void Move()
+    public override void Move()
     {
-        if (Input.GetButton("Horizontal"))
+        if (Stamina >= MoveCost)
         {
-            moveX = Input.GetAxisRaw("Horizontal");
-            CheckNextStep();
-        }
-        else if (Input.GetButton("Vertical"))
-        {
-            moveY = Input.GetAxisRaw("Vertical");
-            CheckNextStep();
+            if (Input.GetButton("Horizontal"))
+            {
+                moveX = Input.GetAxisRaw("Horizontal");
+                CheckNextStep();
+            }
+            else if (Input.GetButton("Vertical"))
+            {
+                moveY = Input.GetAxisRaw("Vertical");
+                CheckNextStep();
+            }
         }
     }
     public void CheckNextStep()
@@ -122,19 +130,18 @@ public class Player : Base
         anim.SetFloat("MoveY", moveY);
     }
 
-    public void Attack()
+    public override void Attack()
     {
 		if (Input.GetKeyDown (KeyCode.LeftControl)) 
 		{
 			RaycastHit2D[] hits;
 			hits = Physics2D.RaycastAll(transform.position, faceDir , 1.0f);
-			bool wall = false;
 			foreach (RaycastHit2D hit in hits)
 			{
 				if (hit.collider.tag == "Enemy" && !hit.collider.isTrigger)
 				{
-					Combat.instance.DealDamage(hit.collider.GetComponent<Base>(),this);
-					Turns.instance.EndTurn (this);
+					Combat.DealDamage(hit.collider.GetComponent<Base>(),this);
+                    Stamina -= AttackCost;
 				}
 			}
 		}

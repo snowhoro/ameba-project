@@ -26,8 +26,11 @@ public class Base : MonoBehaviour
 	public int Agility;
 	public int Speed;
 
-
+    public int MaxStamina;
 	public int Stamina;
+
+    public int AttackCost;
+    public int MoveCost;
 
     public virtual void Move(){}
     public virtual void Attack(){}
