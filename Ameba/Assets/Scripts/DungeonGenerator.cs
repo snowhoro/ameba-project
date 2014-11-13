@@ -469,8 +469,10 @@ public class DungeonGenerator : MonoBehaviour
         else 
         {
             player = (GameObject)GameObject.Instantiate(prefab_player, new Vector3((int)rooms[0].center.x, (int)rooms[0].center.y, -1), Quaternion.identity);
-            stairs = (GameObject)GameObject.Instantiate(prefab_stairs, new Vector3((int)rooms[rooms.Length - 1].center.x, (int)rooms[rooms.Length - 1].center.y, -1), Quaternion.identity);
         }
+
+        stairs = (GameObject)GameObject.Instantiate(prefab_stairs, new Vector3((int)rooms[rooms.Length - 1].center.x, (int)rooms[rooms.Length - 1].center.y, -1), Quaternion.identity);
+
     }
 
     //public bool IsBlocked(Vector2 vec)
