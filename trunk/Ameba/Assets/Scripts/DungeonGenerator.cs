@@ -82,6 +82,8 @@ public class DungeonGenerator : MonoBehaviour
         CreateRooms();
         Open_tunnel();
         DrawDungeon();
+		SetWalls ();
+		SetFloor();
         SetPlayer();
         Pathfinding.instance.LoadPathfinder(dungeonMatrix, dungeonWidth, dungeonHeight);
         GenerateEnemies();
@@ -457,6 +459,208 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
     }
+
+
+	public GameObject floor_topLeftRight;
+	public GameObject floor_botLeftRight;
+	public GameObject floor_topBotLeft;
+	public GameObject floor_topBotRight;
+
+	public GameObject floor_cornerRightBot;
+	public GameObject floor_cornerRightTop;	
+	public GameObject floor_cornerLeftBot;
+	public GameObject floor_cornerLeftTop;
+
+
+	public GameObject floor_topBot;
+	public GameObject floor_leftRight;
+	public GameObject floor_topLeft;
+	public GameObject floor_topRight;
+	public GameObject floor_botRight;
+	public GameObject floor_botLeft;
+
+	public GameObject floor_left;
+	public GameObject floor_right;
+	public GameObject floor_bot;
+	public GameObject floor_top;
+	
+	public void SetWalls()
+	{
+		for (int x = 0; x < dungeonWidth; x++)
+		{
+			for (int y = 0; y < dungeonHeight; y++)
+			{
+				if( dungeonMatrix[x,y].type == (short)TileType.None )
+					dungeonMatrix[x,y].type = (short)TileType.Wall;
+			}
+		}
+	}
+
+	public void SetFloor()
+	{
+		for (int x = 0; x < dungeonWidth; x++)
+		{
+			for (int y = 0; y < dungeonHeight; y++)
+			{
+
+				if(SearchFor(TileType.Floor,new Vector2(x,y)) || SearchFor(TileType.Door,new Vector2(x,y)) )
+				{
+					//CUATRO
+					if(SearchFor(TileType.Wall,new Vector2(x,y+1)) 
+					   && SearchFor(TileType.Wall,new Vector2(x,y-1))
+					   && SearchFor(TileType.Wall,new Vector2(x+1,y))
+					   && SearchFor(TileType.Wall,new Vector2(x-1,y)))
+					{
+						//NORMAL FLOOR
+					}
+
+
+
+					// TRES 
+					else if(SearchFor(TileType.Wall,new Vector2(x,y+1)) 
+					   && SearchFor(TileType.Wall,new Vector2(x+1,y))
+					   && SearchFor(TileType.Wall,new Vector2(x-1,y)))
+					{
+						//TOP LEFT RIGHT
+						Instantiate(floor_topLeftRight, new Vector2(x,y),Quaternion.identity);
+					}
+					else if( SearchFor(TileType.Wall,new Vector2(x,y-1))
+					 && SearchFor(TileType.Wall,new Vector2(x+1,y))
+					 && SearchFor(TileType.Wall,new Vector2(x-1,y)))
+					{
+						//BOT LEFT RIGHT
+						Instantiate(floor_botLeftRight, new Vector2(x,y),Quaternion.identity);
+						
+					}
+					else if(SearchFor(TileType.Wall,new Vector2(x,y+1)) 
+					   && SearchFor(TileType.Wall,new Vector2(x,y-1))
+					   && SearchFor(TileType.Wall,new Vector2(x-1,y))
+					   )
+					{
+						// TOP BOT LEFT
+						Instantiate(floor_topBotLeft, new Vector2(x,y),Quaternion.identity);
+					}
+					else if(SearchFor(TileType.Wall,new Vector2(x,y+1)) 
+					   && SearchFor(TileType.Wall,new Vector2(x,y-1))
+					   && SearchFor(TileType.Wall,new Vector2(x+1,y)))
+					{
+						//TOP BOT RIGHT
+						Instantiate(floor_topBotRight, new Vector2(x,y),Quaternion.identity);
+						
+					}
+
+						
+
+					//DOS + ESQUINAS
+					else if(SearchFor(TileType.Wall,new Vector2(x,y+1)) 
+					   && SearchFor(TileType.Wall,new Vector2(x-1,y))
+					   && SearchFor(TileType.Wall,new Vector2(x+1,y-1)))
+					{
+						//TOP LEFT    CORNER RIGHT BOT
+						Instantiate(floor_cornerRightBot, new Vector2(x,y),Quaternion.identity);
+						
+					}
+					else if(SearchFor(TileType.Wall,new Vector2(x,y+1)) 
+					        && SearchFor(TileType.Wall,new Vector2(x+1,y))
+					        && SearchFor(TileType.Wall,new Vector2(x-1,y-1)))
+					{
+						//TOP RIGHT   CORNER LEFT BOT
+						Instantiate(floor_cornerLeftBot, new Vector2(x,y),Quaternion.identity);
+						
+					}
+					else if(SearchFor(TileType.Wall,new Vector2(x,y-1)) 
+					        && SearchFor(TileType.Wall,new Vector2(x+1,y))
+					        && SearchFor(TileType.Wall,new Vector2(x-1,y+1)))
+					{
+						//BOT RIGHT   CORNER LEFT TOP
+						Instantiate(floor_cornerLeftTop, new Vector2(x,y),Quaternion.identity);
+						
+					}
+					else if(SearchFor(TileType.Wall,new Vector2(x,y-1)) 
+					        && SearchFor(TileType.Wall,new Vector2(x-1,y))
+					        && SearchFor(TileType.Wall,new Vector2(x+1,y+1)))
+					{
+						//BOT LEFT   CORNER RIGHT TOP
+						Instantiate(floor_cornerRightTop, new Vector2(x,y),Quaternion.identity);
+						
+					}
+
+
+
+					//DOS
+					else if(SearchFor(TileType.Wall,new Vector2(x,y+1)) 
+					        && SearchFor(TileType.Wall,new Vector2(x,y-1)))
+					{
+						//TOP BOT
+						Instantiate(floor_topBot, new Vector2(x,y),Quaternion.identity);
+						
+					}
+					else if(SearchFor(TileType.Wall,new Vector2(x+1,y)) 
+					        && SearchFor(TileType.Wall,new Vector2(x-1,y)))
+					{
+						//LEFT RIGHT
+						Instantiate(floor_leftRight, new Vector2(x,y),Quaternion.identity);
+						
+					}
+					else if(SearchFor(TileType.Wall,new Vector2(x,y+1)) 
+					        && SearchFor(TileType.Wall,new Vector2(x-1,y)))
+					{
+						//TOP LEFT
+						Instantiate(floor_topLeft, new Vector2(x,y),Quaternion.identity);
+						
+					}
+					else if(SearchFor(TileType.Wall,new Vector2(x,y+1)) 
+					        && SearchFor(TileType.Wall,new Vector2(x+1,y)))
+					{
+						//TOP RIGHT
+						Instantiate(floor_topRight, new Vector2(x,y),Quaternion.identity);
+						
+					}
+					else if(SearchFor(TileType.Wall,new Vector2(x,y-1)) 
+					        && SearchFor(TileType.Wall,new Vector2(x+1,y)))
+					{
+						//BOT RIGHT
+						Instantiate(floor_botRight, new Vector2(x,y),Quaternion.identity);
+						
+					}
+					else if(SearchFor(TileType.Wall,new Vector2(x,y-1)) 
+					        && SearchFor(TileType.Wall,new Vector2(x-1,y)))
+					{
+						//BOT LEFT
+						Instantiate(floor_botLeft, new Vector2(x,y),Quaternion.identity);
+						
+					}
+
+					// UNO
+
+					else if(SearchFor(TileType.Wall,new Vector2(x,y+1)))
+					{
+						//TOP
+						Instantiate(floor_top, new Vector2(x,y),Quaternion.identity);
+						
+					}
+					else if(SearchFor(TileType.Wall,new Vector2(x,y-1)))
+					{
+						//BOT
+						Instantiate(floor_bot, new Vector2(x,y),Quaternion.identity);
+						
+					}
+					else if(SearchFor(TileType.Wall,new Vector2(x+1,y)))
+					{
+						//RIGHT
+						Instantiate(floor_right, new Vector2(x,y),Quaternion.identity);
+						
+					}
+					else if(SearchFor(TileType.Wall,new Vector2(x-1,y)))
+					{
+						//LEFT
+						Instantiate(floor_left, new Vector2(x,y),Quaternion.identity);
+					}
+				}
+			
+			}
+		}
+	}
 
     public void SetPlayer()
     {
