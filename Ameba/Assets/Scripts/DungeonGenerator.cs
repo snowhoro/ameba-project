@@ -231,9 +231,29 @@ public class DungeonGenerator : MonoBehaviour
 
     private bool SearchFor(TileType search, Vector2 vec)
     {
-        if (0 < vec.x && vec.x < dungeonWidth && 0 < vec.y && vec.y < dungeonHeight)
+        if (0 < vec.x && vec.x < dungeonWidth -1 && 0 < vec.y && vec.y < dungeonHeight -2)
         {
             if (dungeonMatrix[(int)vec.x, (int)vec.y].type == (short)search)
+                return true;
+        }
+        return false;
+    }
+
+    private bool IsFloor(Vector2 vec)
+    {
+        if (0 <= vec.x && vec.x < dungeonWidth -1 && 0 < vec.y && vec.y < dungeonHeight -2)
+        {
+            if (dungeonMatrix[(int)vec.x, (int)vec.y].type == (short)TileType.Floor 
+                || dungeonMatrix[(int)vec.x, (int)vec.y].type == (short)TileType.Door)
+                return true;
+        }
+        return false;
+    }
+    private bool IsWall(Vector2 vec)
+    {
+        if (0 <= vec.x && vec.x < dungeonWidth && 0 < vec.y && vec.y < dungeonHeight - 1)
+        {
+            if (dungeonMatrix[(int)vec.x, (int)vec.y].type == (short)TileType.Wall)
                 return true;
         }
         return false;
@@ -483,6 +503,31 @@ public class DungeonGenerator : MonoBehaviour
 	public GameObject floor_right;
 	public GameObject floor_bot;
 	public GameObject floor_top;
+
+    public GameObject wall_topLeftRight;
+    public GameObject wall_botLeftRight;
+    public GameObject wall_topBotLeft;
+    public GameObject wall_topBotRight;
+                      
+    public GameObject wall_cornerRightBot;
+    public GameObject wall_cornerRightTop;
+    public GameObject wall_cornerLeftBot;
+    public GameObject wall_cornerLeftTop;
+                      
+    public GameObject wall_topBot;
+    public GameObject wall_leftRight;
+    public GameObject wall_topLeft;
+    public GameObject wall_topRight;
+    public GameObject wall_botRight;
+    public GameObject wall_botLeft;
+                      
+    public GameObject wall_left;
+    public GameObject wall_right;
+    public GameObject wall_bot;
+    public GameObject wall_top;
+
+    public GameObject prefab_wall2;
+
 	
 	public void SetWalls()
 	{
@@ -502,83 +547,80 @@ public class DungeonGenerator : MonoBehaviour
 		{
 			for (int y = 0; y < dungeonHeight; y++)
 			{
+                #region FloorTiles
+                if (IsFloor(new Vector2(x,y)))
+				{                    
 
-				if(SearchFor(TileType.Floor,new Vector2(x,y)) || SearchFor(TileType.Door,new Vector2(x,y)) )
-				{
 					//CUATRO
-					if(SearchFor(TileType.Wall,new Vector2(x,y+1)) 
-					   && SearchFor(TileType.Wall,new Vector2(x,y-1))
-					   && SearchFor(TileType.Wall,new Vector2(x+1,y))
-					   && SearchFor(TileType.Wall,new Vector2(x-1,y)))
+					if(IsWall(new Vector2(x,y+1)) 
+					   && IsWall(new Vector2(x,y-1))
+					   && IsWall(new Vector2(x+1,y))
+					   && IsWall(new Vector2(x-1,y)))
 					{
 						//NORMAL FLOOR
-					}
-
-
-
+					}    
 					// TRES 
-					else if(SearchFor(TileType.Wall,new Vector2(x,y+1)) 
-					   && SearchFor(TileType.Wall,new Vector2(x+1,y))
-					   && SearchFor(TileType.Wall,new Vector2(x-1,y)))
+					else if(IsWall(new Vector2(x,y+1)) 
+					   && IsWall(new Vector2(x+1,y))
+					   && IsWall(new Vector2(x-1,y)))
 					{
 						//TOP LEFT RIGHT
 						Instantiate(floor_topLeftRight, new Vector2(x,y),Quaternion.identity);
 					}
-					else if( SearchFor(TileType.Wall,new Vector2(x,y-1))
-					 && SearchFor(TileType.Wall,new Vector2(x+1,y))
-					 && SearchFor(TileType.Wall,new Vector2(x-1,y)))
+					else if( IsWall(new Vector2(x,y-1))
+					 && IsWall(new Vector2(x+1,y))
+					 && IsWall(new Vector2(x-1,y)))
 					{
 						//BOT LEFT RIGHT
 						Instantiate(floor_botLeftRight, new Vector2(x,y),Quaternion.identity);
 						
 					}
-					else if(SearchFor(TileType.Wall,new Vector2(x,y+1)) 
-					   && SearchFor(TileType.Wall,new Vector2(x,y-1))
-					   && SearchFor(TileType.Wall,new Vector2(x-1,y))
+					else if(IsWall(new Vector2(x,y+1)) 
+					   && IsWall(new Vector2(x,y-1))
+					   && IsWall(new Vector2(x-1,y))
 					   )
 					{
 						// TOP BOT LEFT
 						Instantiate(floor_topBotLeft, new Vector2(x,y),Quaternion.identity);
 					}
-					else if(SearchFor(TileType.Wall,new Vector2(x,y+1)) 
-					   && SearchFor(TileType.Wall,new Vector2(x,y-1))
-					   && SearchFor(TileType.Wall,new Vector2(x+1,y)))
+					else if(IsWall(new Vector2(x,y+1)) 
+					   && IsWall(new Vector2(x,y-1))
+					   && IsWall(new Vector2(x+1,y)))
 					{
 						//TOP BOT RIGHT
 						Instantiate(floor_topBotRight, new Vector2(x,y),Quaternion.identity);
 						
 					}
 
-						
 
 					//DOS + ESQUINAS
-					else if(SearchFor(TileType.Wall,new Vector2(x,y+1)) 
-					   && SearchFor(TileType.Wall,new Vector2(x-1,y))
-					   && SearchFor(TileType.Wall,new Vector2(x+1,y-1)))
+					else if(IsWall(new Vector2(x,y+1)) 
+					   && IsWall(new Vector2(x-1,y))
+					   && IsWall(new Vector2(x+1,y-1)))
 					{
 						//TOP LEFT    CORNER RIGHT BOT
 						Instantiate(floor_cornerRightBot, new Vector2(x,y),Quaternion.identity);
 						
 					}
-					else if(SearchFor(TileType.Wall,new Vector2(x,y+1)) 
-					        && SearchFor(TileType.Wall,new Vector2(x+1,y))
-					        && SearchFor(TileType.Wall,new Vector2(x-1,y-1)))
+					else if(IsWall(new Vector2(x,y+1)) 
+					        && IsWall(new Vector2(x+1,y))
+					        && IsWall(new Vector2(x-1,y-1)))
 					{
 						//TOP RIGHT   CORNER LEFT BOT
 						Instantiate(floor_cornerLeftBot, new Vector2(x,y),Quaternion.identity);
 						
 					}
-					else if(SearchFor(TileType.Wall,new Vector2(x,y-1)) 
-					        && SearchFor(TileType.Wall,new Vector2(x+1,y))
-					        && SearchFor(TileType.Wall,new Vector2(x-1,y+1)))
+					else if(IsWall(new Vector2(x,y-1)) 
+					        && IsWall(new Vector2(x+1,y))
+					        && IsWall(new Vector2(x-1,y+1)))
 					{
 						//BOT RIGHT   CORNER LEFT TOP
 						Instantiate(floor_cornerLeftTop, new Vector2(x,y),Quaternion.identity);
 						
 					}
-					else if(SearchFor(TileType.Wall,new Vector2(x,y-1)) 
-					        && SearchFor(TileType.Wall,new Vector2(x-1,y))
-					        && SearchFor(TileType.Wall,new Vector2(x+1,y+1)))
+					else if(IsWall(new Vector2(x,y-1)) 
+					        && IsWall(new Vector2(x-1,y))
+					        && IsWall(new Vector2(x+1,y+1)))
 					{
 						//BOT LEFT   CORNER RIGHT TOP
 						Instantiate(floor_cornerRightTop, new Vector2(x,y),Quaternion.identity);
@@ -588,43 +630,43 @@ public class DungeonGenerator : MonoBehaviour
 
 
 					//DOS
-					else if(SearchFor(TileType.Wall,new Vector2(x,y+1)) 
-					        && SearchFor(TileType.Wall,new Vector2(x,y-1)))
+					else if(IsWall(new Vector2(x,y+1)) 
+					        && IsWall(new Vector2(x,y-1)))
 					{
 						//TOP BOT
 						Instantiate(floor_topBot, new Vector2(x,y),Quaternion.identity);
 						
 					}
-					else if(SearchFor(TileType.Wall,new Vector2(x+1,y)) 
-					        && SearchFor(TileType.Wall,new Vector2(x-1,y)))
+					else if(IsWall(new Vector2(x+1,y)) 
+					        && IsWall(new Vector2(x-1,y)))
 					{
 						//LEFT RIGHT
 						Instantiate(floor_leftRight, new Vector2(x,y),Quaternion.identity);
 						
 					}
-					else if(SearchFor(TileType.Wall,new Vector2(x,y+1)) 
-					        && SearchFor(TileType.Wall,new Vector2(x-1,y)))
+					else if(IsWall(new Vector2(x,y+1)) 
+					        && IsWall(new Vector2(x-1,y)))
 					{
 						//TOP LEFT
 						Instantiate(floor_topLeft, new Vector2(x,y),Quaternion.identity);
 						
 					}
-					else if(SearchFor(TileType.Wall,new Vector2(x,y+1)) 
-					        && SearchFor(TileType.Wall,new Vector2(x+1,y)))
+					else if(IsWall(new Vector2(x,y+1)) 
+					        && IsWall(new Vector2(x+1,y)))
 					{
 						//TOP RIGHT
 						Instantiate(floor_topRight, new Vector2(x,y),Quaternion.identity);
 						
 					}
-					else if(SearchFor(TileType.Wall,new Vector2(x,y-1)) 
-					        && SearchFor(TileType.Wall,new Vector2(x+1,y)))
+					else if(IsWall(new Vector2(x,y-1)) 
+					        && IsWall(new Vector2(x+1,y)))
 					{
 						//BOT RIGHT
 						Instantiate(floor_botRight, new Vector2(x,y),Quaternion.identity);
 						
 					}
-					else if(SearchFor(TileType.Wall,new Vector2(x,y-1)) 
-					        && SearchFor(TileType.Wall,new Vector2(x-1,y)))
+					else if(IsWall(new Vector2(x,y-1)) 
+					        && IsWall(new Vector2(x-1,y)))
 					{
 						//BOT LEFT
 						Instantiate(floor_botLeft, new Vector2(x,y),Quaternion.identity);
@@ -633,32 +675,333 @@ public class DungeonGenerator : MonoBehaviour
 
 					// UNO
 
-					else if(SearchFor(TileType.Wall,new Vector2(x,y+1)))
+					else if(IsWall(new Vector2(x,y+1)))
 					{
 						//TOP
 						Instantiate(floor_top, new Vector2(x,y),Quaternion.identity);
 						
 					}
-					else if(SearchFor(TileType.Wall,new Vector2(x,y-1)))
+					else if(IsWall(new Vector2(x,y-1)))
 					{
 						//BOT
 						Instantiate(floor_bot, new Vector2(x,y),Quaternion.identity);
 						
 					}
-					else if(SearchFor(TileType.Wall,new Vector2(x+1,y)))
+					else if(IsWall(new Vector2(x+1,y)))
 					{
 						//RIGHT
 						Instantiate(floor_right, new Vector2(x,y),Quaternion.identity);
 						
 					}
-					else if(SearchFor(TileType.Wall,new Vector2(x-1,y)))
+					else if(IsWall(new Vector2(x-1,y)))
 					{
 						//LEFT
 						Instantiate(floor_left, new Vector2(x,y),Quaternion.identity);
 					}
-				}
-			
-			}
+                }
+
+                #endregion
+                #region WallTiles
+                else if (dungeonMatrix[x, y].type == (short) TileType.Wall)
+                {
+                    //CUATRO
+                    if (SearchFor(TileType.Floor, new Vector2(x, y + 1))
+                       && SearchFor(TileType.Floor, new Vector2(x, y - 1))
+                       && SearchFor(TileType.Floor, new Vector2(x + 1, y))
+                       && SearchFor(TileType.Floor, new Vector2(x - 1, y)))
+                    {
+                        //NORMAL wall
+                    }
+
+                    else if (SearchFor(TileType.Floor, new Vector2(x, y - 1)) || SearchFor(TileType.Door, new Vector2(x, y - 1)))
+                    {
+                        //WALL
+                        Instantiate(prefab_wall2, new Vector2(x,y),Quaternion.identity);
+
+                    }
+
+
+
+                    else if (IsWall( new Vector2(x, y - 1))
+                            && IsFloor( new Vector2(x, y - 2))
+                            && (IsFloor( new Vector2(x + 1, y))
+                            || (IsWall( new Vector2(x + 1, y))
+                            && IsFloor( new Vector2(x + 1, y -1))))
+                            && (IsFloor( new Vector2(x - 1, y))
+                            || (IsWall( new Vector2(x - 1, y))
+                            && IsFloor( new Vector2(x - 1, y - 1)))))
+                    {
+                        // BOT LEFT RIGHT
+                        Instantiate(wall_botLeftRight, new Vector2(x, y), Quaternion.identity);
+                    }
+
+                    else if ((IsFloor( new Vector2(x - 1, y))
+                            || (IsWall( new Vector2(x - 1, y))
+                            && IsFloor( new Vector2(x - 1, y - 1))))
+                            && (IsFloor( new Vector2(x + 1, y))
+                            || (IsWall( new Vector2(x + 1, y))
+                            && IsFloor( new Vector2(x + 1, y - 1))))
+                            && IsFloor( new Vector2(x, y + 1)))
+                    {
+                        //TOP LEFT RIGHT
+                        Instantiate(wall_topLeftRight, new Vector2(x, y), Quaternion.identity);
+                    }
+
+
+                    else if (IsFloor( new Vector2(x, y + 1))
+                            && (IsFloor(new Vector2(x - 1, y))
+                            || (IsWall( new Vector2(x - 1, y))
+                            && IsFloor(new Vector2(x - 1, y - 1))))
+                            && IsWall( new Vector2(x, y - 1))
+                            && IsFloor( new Vector2(x , y - 2))
+                            )
+                    {
+                        //TOP BOT LEFT
+                        Instantiate(wall_topBotLeft, new Vector2(x, y), Quaternion.identity);
+                    }
+
+                    else if (IsFloor( new Vector2(x, y + 1))
+                            && (IsFloor(new Vector2(x + 1, y))
+                            || (IsWall( new Vector2(x + 1, y))
+                            && IsFloor(new Vector2(x + 1, y - 1))))
+                            && IsWall( new Vector2(x, y - 1))
+                            && IsFloor( new Vector2(x, y - 2))
+                            )
+                    {
+                        //TOP BOT RIGHT
+                        Instantiate(wall_topBotRight, new Vector2(x, y), Quaternion.identity);
+                    }
+
+                    else if (IsWall( new Vector2(x, y - 1))
+                        && IsFloor( new Vector2(x, y - 2))
+                        && IsFloor( new Vector2(x, y + 1)))
+                    {
+                        // BOT TOP
+                        Instantiate(wall_topBot, new Vector2(x, y), Quaternion.identity);
+                    }
+
+
+                    else if ((IsFloor( new Vector2(x + 1, y))
+                        || (IsWall( new Vector2(x + 1, y))
+                        && IsFloor( new Vector2(x + 1, y - 1))))
+                        && (IsFloor( new Vector2(x - 1, y))
+                        || (IsWall( new Vector2(x - 1, y))
+                        && IsFloor( new Vector2(x - 1, y - 1))))
+                        )
+                    {
+                        // LEFT RIGHT
+                        Instantiate(wall_leftRight, new Vector2(x, y), Quaternion.identity);
+                    }
+
+
+                    else if (IsWall( new Vector2(x, y - 1))
+                        && IsFloor( new Vector2(x, y - 2))
+                        && (IsFloor( new Vector2(x + 1, y))
+                        || (IsWall( new Vector2(x + 1, y))
+                        && IsFloor( new Vector2(x + 1, y - 1))))
+                        )
+                    {
+                        // BOT RIGHT
+                        Instantiate(wall_botRight, new Vector2(x, y), Quaternion.identity);
+                    }
+
+                    else if (IsWall( new Vector2(x, y - 1))
+                        && IsFloor( new Vector2(x, y - 2))
+                        && (IsFloor( new Vector2(x - 1, y))
+                        || (IsWall( new Vector2(x - 1, y))
+                        && IsFloor( new Vector2(x - 1, y - 1)))))
+                    {
+                        // BOT LEFT
+                        Instantiate(wall_botLeft, new Vector2(x, y), Quaternion.identity);
+                    }
+
+                    else if (IsFloor( new Vector2(x, y + 1))
+                        && (IsFloor( new Vector2(x + 1, y))
+                        || (IsWall( new Vector2(x + 1, y))
+                        && IsFloor( new Vector2(x + 1, y - 1)))))
+                    {
+                        // TOP RIGHT
+                        Instantiate(wall_topRight, new Vector2(x, y), Quaternion.identity);
+                    }
+
+                    else if (IsFloor( new Vector2(x, y + 1))
+                    && (IsFloor( new Vector2(x - 1, y))
+                    || (IsWall( new Vector2(x - 1, y))
+                    && IsFloor( new Vector2(x - 1, y - 1)))))
+                    {
+                        // TOP LEFT
+                        Instantiate(wall_topLeft, new Vector2(x, y), Quaternion.identity);
+                    }
+
+
+                    //// UNO
+                    else if (IsWall( new Vector2(x, y - 1))
+                    && IsFloor( new Vector2(x, y - 2)))
+                    {
+                        // BOT 
+                        Instantiate(wall_bot, new Vector2(x, y), Quaternion.identity);
+                    }
+                    else if (IsWall( new Vector2(x + 1 , y))
+                    && IsFloor( new Vector2(x +1, y - 1 )))
+                    {
+                        //RIGHT
+                        Instantiate(wall_right, new Vector2(x, y), Quaternion.identity);
+                    }
+
+                    else if (IsWall( new Vector2(x - 1, y))
+                             && IsFloor( new Vector2(x - 1, y - 1)))
+                    {
+                        //LEFT
+                        Instantiate(wall_left, new Vector2(x, y), Quaternion.identity);
+                    }
+
+
+
+                    // TRES 
+                    else if (IsFloor( new Vector2(x, y + 1))
+                       && IsFloor( new Vector2(x + 1, y))
+                       && IsFloor( new Vector2(x - 1, y)))
+                    {
+                        //TOP LEFT RIGHT
+                        Instantiate(wall_topLeftRight, new Vector2(x, y), Quaternion.identity);
+                    }
+                    else if (IsFloor( new Vector2(x, y - 1))
+                     && IsFloor( new Vector2(x + 1, y))
+                     && IsFloor( new Vector2(x - 1, y)))
+                    {
+                        //BOT LEFT RIGHT
+                        Instantiate(wall_botLeftRight, new Vector2(x, y), Quaternion.identity);
+
+                    }
+                    else if (IsFloor( new Vector2(x, y + 1))
+                       && IsFloor( new Vector2(x, y - 1))
+                       && IsFloor( new Vector2(x - 1, y))
+                       )
+                    {
+                        // TOP BOT LEFT
+                        Instantiate(wall_topBotLeft, new Vector2(x, y), Quaternion.identity);
+                    }
+                    else if (IsFloor( new Vector2(x, y + 1))
+                       && IsFloor( new Vector2(x, y - 1))
+                       && IsFloor( new Vector2(x + 1, y)))
+                    {
+                        //TOP BOT RIGHT
+                        Instantiate(wall_topBotRight, new Vector2(x, y), Quaternion.identity);
+
+                    }
+
+
+
+                    //DOS + ESQUINAS
+                    else if (IsFloor( new Vector2(x, y + 1))
+                       && IsFloor( new Vector2(x - 1, y))
+                       && IsFloor( new Vector2(x + 1, y - 1)))
+                    {
+                        //TOP LEFT    CORNER RIGHT BOT
+                        Instantiate(wall_cornerRightBot, new Vector2(x, y), Quaternion.identity);
+
+                    }
+                    else if (IsFloor( new Vector2(x, y + 1))
+                            && IsFloor( new Vector2(x + 1, y))
+                            && IsFloor( new Vector2(x - 1, y - 1)))
+                    {
+                        //TOP RIGHT   CORNER LEFT BOT
+                        Instantiate(wall_cornerLeftBot, new Vector2(x, y), Quaternion.identity);
+
+                    }
+                    else if (IsFloor( new Vector2(x, y - 1))
+                            && IsFloor( new Vector2(x + 1, y))
+                            && IsFloor( new Vector2(x - 1, y + 1)))
+                    {
+                        //BOT RIGHT   CORNER LEFT TOP
+                        Instantiate(wall_cornerLeftTop, new Vector2(x, y), Quaternion.identity);
+
+                    }
+                    else if (IsFloor( new Vector2(x, y - 1))
+                            && IsFloor( new Vector2(x - 1, y))
+                            && IsFloor( new Vector2(x + 1, y + 1)))
+                    {
+                        //BOT LEFT   CORNER RIGHT TOP
+                        Instantiate(wall_cornerRightTop, new Vector2(x, y), Quaternion.identity);
+
+                    }
+
+
+
+
+
+                    //DOS
+                    else if (IsFloor( new Vector2(x, y + 1))
+                            && IsFloor( new Vector2(x, y - 1)))
+                    {
+                        //TOP BOT
+                        Instantiate(wall_topBot, new Vector2(x, y), Quaternion.identity);
+
+                    }
+                    else if (IsFloor( new Vector2(x + 1, y))
+                            && IsFloor( new Vector2(x - 1, y)))
+                    {
+                        //LEFT RIGHT
+                        Instantiate(wall_leftRight, new Vector2(x, y), Quaternion.identity);
+
+                    }
+                    else if (IsFloor( new Vector2(x, y + 1))
+                            && IsFloor( new Vector2(x - 1, y)))
+                    {
+                        //TOP LEFT
+                        Instantiate(wall_topLeft, new Vector2(x, y), Quaternion.identity);
+
+                    }
+                    else if (IsFloor( new Vector2(x, y + 1))
+                            && IsFloor( new Vector2(x + 1, y)))
+                    {
+                        //TOP RIGHT
+                        Instantiate(wall_topRight, new Vector2(x, y), Quaternion.identity);
+
+                    }
+                    else if (IsFloor( new Vector2(x, y - 1))
+                            && IsFloor( new Vector2(x + 1, y)))
+                    {
+                        //BOT RIGHT
+                        Instantiate(wall_botRight, new Vector2(x, y), Quaternion.identity);
+
+                    }
+                    else if (IsFloor( new Vector2(x, y - 1))
+                            && IsFloor( new Vector2(x - 1, y)))
+                    {
+                        //BOT LEFT
+                        Instantiate(wall_botLeft, new Vector2(x, y), Quaternion.identity);
+
+                    }
+
+                    // UNO
+
+                    else if (IsFloor( new Vector2(x, y + 1)))
+                    {
+                        //TOP
+                        Instantiate(wall_top, new Vector2(x, y), Quaternion.identity);
+
+                    }
+                    else if (IsFloor( new Vector2(x, y - 1)))
+                    {
+                        //BOT
+                        Instantiate(wall_bot, new Vector2(x, y), Quaternion.identity);
+
+                    }
+                    else if (IsFloor( new Vector2(x + 1, y)))
+                    {
+                        //RIGHT
+                        Instantiate(wall_right, new Vector2(x, y), Quaternion.identity);
+
+                    }
+                    else if (IsFloor( new Vector2(x - 1, y)))
+                    {
+                        //LEFT
+                        Instantiate(wall_left, new Vector2(x, y), Quaternion.identity);
+                    }
+                }
+                #endregion
+            }
 		}
 	}
 
