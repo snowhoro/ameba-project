@@ -1,0 +1,224 @@
+fileFormatVersion: 2
+guid: 3961494f8c0de2e41ba6657930f76e04
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: ameba.attck_0
+    21300002: ameba.attck_1
+    21300004: ameba.attck_2
+    21300006: ameba.attck_3
+    21300008: ameba.attck_4
+    21300010: ameba.attck_5
+    21300012: ameba.attck_6
+    21300014: ameba.attck_7
+    21300016: ameba.attck_8
+    21300018: ameba.attck_9
+    21300020: ameba.attck_10
+    21300022: ameba.attck_11
+    21300024: ameba.attck_12
+    21300026: ameba.attck_13
+    21300028: ameba.attck_14
+    21300030: ameba.attck_15
+    21300032: ameba.attck_16
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: ameba.attck_0
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 1460
+        width: 202
+        height: 387
+      alignment: 9
+      pivot: {x: .217953071, y: .105974697}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba.attck_1
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 1454
+        width: 178
+        height: 404
+      alignment: 9
+      pivot: {x: .245822176, y: .0893729925}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba.attck_2
+      rect:
+        serializedVersion: 2
+        x: 1644
+        y: 1460
+        width: 234
+        height: 390
+      alignment: 9
+      pivot: {x: .371100545, y: .0961156636}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba.attck_3
+      rect:
+        serializedVersion: 2
+        x: 2351
+        y: 1460
+        width: 307
+        height: 339
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba.attck_4
+      rect:
+        serializedVersion: 2
+        x: 3073
+        y: 1625
+        width: 173
+        height: 51
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba.attck_5
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 1048
+        width: 292
+        height: 295
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba.attck_6
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 1039
+        width: 342
+        height: 209
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba.attck_7
+      rect:
+        serializedVersion: 2
+        x: 1720
+        y: 1048
+        width: 396
+        height: 133
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba.attck_8
+      rect:
+        serializedVersion: 2
+        x: 2322
+        y: 1019
+        width: 406
+        height: 127
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba.attck_10
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 566
+        width: 307
+        height: 339
+      alignment: 9
+      pivot: {x: .519518912, y: .117010519}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba.attck_11
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 569
+        width: 313
+        height: 336
+      alignment: 9
+      pivot: {x: .525526345, y: .107646212}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba.attck_12
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 553
+        width: 292
+        height: 314
+      alignment: 9
+      pivot: {x: .322146475, y: .0992402509}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba.attck_13
+      rect:
+        serializedVersion: 2
+        x: 2522
+        y: 553
+        width: 256
+        height: 321
+      alignment: 9
+      pivot: {x: .156690598, y: .0893119276}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba.attck_14
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 52
+        width: 263
+        height: 340
+      alignment: 9
+      pivot: {x: .143043548, y: .118136935}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba.attck_15
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 49
+        width: 253
+        height: 361
+      alignment: 9
+      pivot: {x: .199989766, y: .107152246}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ameba.attck_16
+      rect:
+        serializedVersion: 2
+        x: 2074
+        y: 0
+        width: 394
+        height: 261
+      alignment: 9
+      pivot: {x: .114707679, y: .239797696}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

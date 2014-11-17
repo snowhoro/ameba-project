@@ -1,0 +1,168 @@
+fileFormatVersion: 2
+guid: f84d03d92651fdd46b09ac2039cd5aec
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: vida_0
+    21300002: vida_1
+    21300004: vida_2
+    21300006: vida_3
+    21300008: vida_4
+    21300010: vida_5
+    21300012: vida_6
+    21300014: vida_7
+    21300016: vida_8
+    21300018: vida_9
+    21300020: vida_10
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: vida_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4233
+        width: 3019
+        height: 1069
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: vida_1
+      rect:
+        serializedVersion: 2
+        x: 1001
+        y: 3617
+        width: 1961
+        height: 471
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: vida_2
+      rect:
+        serializedVersion: 2
+        x: 3200
+        y: 3653
+        width: 158
+        height: 404
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: vida_3
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 2535
+        width: 973
+        height: 968
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: vida_4
+      rect:
+        serializedVersion: 2
+        x: 1187
+        y: 3083
+        width: 906
+        height: 425
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: vida_5
+      rect:
+        serializedVersion: 2
+        x: 2455
+        y: 2866
+        width: 305
+        height: 305
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: vida_6
+      rect:
+        serializedVersion: 2
+        x: 872
+        y: 1665
+        width: 2147
+        height: 559
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: vida_7
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 1162
+        width: 2060
+        height: 472
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: vida_8
+      rect:
+        serializedVersion: 2
+        x: 2766
+        y: 727
+        width: 160
+        height: 404
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: vida_9
+      rect:
+        serializedVersion: 2
+        x: 1131
+        y: 318
+        width: 1521
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: vida_10
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 0
+        width: 1428
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

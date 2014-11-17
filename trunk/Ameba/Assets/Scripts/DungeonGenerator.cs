@@ -713,7 +713,7 @@ public class DungeonGenerator : MonoBehaviour
                         //NORMAL wall
                     }
 
-                    else if (SearchFor(TileType.Floor, new Vector2(x, y - 1)) || SearchFor(TileType.Door, new Vector2(x, y - 1)))
+					else if (IsFloor(new Vector2(x, y - 1)) /*&& !IsFloor(new Vector2(x, y + 1))*/)
                     {
                         //WALL
                         Instantiate(prefab_wall2, new Vector2(x,y),Quaternion.identity);

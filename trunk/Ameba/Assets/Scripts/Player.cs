@@ -140,12 +140,18 @@ public class Player : Base
 			{
 				if (hit.collider.tag == "Enemy" && !hit.collider.isTrigger)
 				{
+					anim.SetTrigger("AttackSide");
 					Combat.DealDamage(hit.collider.GetComponent<Base>(),this);
-                    Stamina -= AttackCost;
+					Stamina -= AttackCost;
 				}
 			}
 		}
 
 
     }
+
+	private void AttackStamina()
+	{
+		//Stamina -= AttackCost;
+	}
 }
