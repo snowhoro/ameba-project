@@ -4,24 +4,57 @@ using System.Collections.Generic;
 
 public class EnemyGenerator : MonoBehaviour
 {
-    public List<GameObject> enemies;
+    public List<Base> enemies;
     public List<GameObject> enemyType;
+
+    /*void Update()
+    {
+        if (enemies.Count != 0)
+        {
+            print("DELETE NODES");
+            Pathfinding.instance.LoadEnemiesPosition(enemies);
+        }
+    }*/
 
     public void GenerateEnemies(Rect[] rooms)
     {
-        enemies = new List<GameObject>();
+        enemies = new List<Base>();
         foreach(Rect room in rooms)
         {
-            /*int rnd = Random.Range(0, 5);
-            while()*/
-            int posX = (int)Random.Range(room.xMin+1, room.xMax-2);
-            int posY = (int)Random.Range(room.yMin+1, room.yMax-2);
-           
-            GameObject enemy = (GameObject) GameObject.Instantiate(enemyType[Random.Range(0,enemyType.Count)], new Vector3(posX,posY, -1), Quaternion.identity);
-            enemies.Add(enemy);
-            enemy.GetComponent<Enemy>().Position = new Vector2(posX, posY);
+            int nroEnemies = Random.Range(5, 5);
+            nroEnemies = 10;
+            for (int i = 0; i < nroEnemies; i++)
+            {
+                int posX;
+                int posY;
+                bool repeat = false;
+                do
+                {
+                    posX = (int)Random.Range(room.xMin + 1, room.xMax - 2);
+                    posY = (int)Random.Range(room.yMin + 1, room.yMax - 2);
 
-            //print(enemies[0].Position);
+                    foreach(Base en in enemies)
+                    {
+                        if ((Vector2)en.transform.position == new Vector2(posX, posY))
+                        {
+                            repeat = true;
+                            break;
+                        }
+                        else
+                            repeat = false;
+                    }
+
+                    if (Player.instance.Position == new Vector2(posX, posY))
+                        repeat = true;
+
+                } while(repeat);
+
+                
+
+                GameObject enemy = (GameObject) GameObject.Instantiate(enemyType[Random.Range(0, enemyType.Count)], new Vector3(posX, posY, -1), Quaternion.identity);
+                enemies.Add(enemy.GetComponent<Base>());
+                enemy.GetComponent<Enemy>().Position = new Vector2(posX, posY);
+            }
             break;
         }
 
@@ -30,11 +63,16 @@ public class EnemyGenerator : MonoBehaviour
 
     public void DeleteEnemies()
     {
-        foreach(GameObject enem in enemies)
+        foreach(Base enem in enemies)
         {
-            Destroy(enem);
+            Destroy(enem.gameObject);
         }
         enemies.Clear();
+    }
+
+    public void DeleteEnemy(Base enemy)
+    {
+        enemies.Remove(enemy);
     }
 
 }

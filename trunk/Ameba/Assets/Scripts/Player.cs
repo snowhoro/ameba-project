@@ -52,6 +52,8 @@ public class Player : Base
         Position = transform.position;
     }
 
+   
+
     void Update()
     {
         moveX = moveY = 0;
@@ -69,7 +71,7 @@ public class Player : Base
             Stamina -= MoveCost;
         }
 
-        if (Stamina == 0)
+        if (Stamina <= 0)
         {
             Turns.instance.EndTurn(this);
             Stamina = MaxStamina;
@@ -121,6 +123,7 @@ public class Player : Base
         {
             target = new Vector3(Position.x + moveX, Position.y + moveY, transform.position.z);
             moving = true;
+            GetComponentInChildren<FieldOfView>().FoV(new Vector2(target.x,target.y));
         }
     }
 
@@ -140,7 +143,7 @@ public class Player : Base
 			{
 				if (hit.collider.tag == "Enemy" && !hit.collider.isTrigger)
 				{
-					anim.SetTrigger("AttackSide");
+					anim.SetTrigger("Attack");
 					Combat.DealDamage(hit.collider.GetComponent<Base>(),this);
 					Stamina -= AttackCost;
 				}

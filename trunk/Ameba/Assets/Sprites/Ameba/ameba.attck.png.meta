@@ -97,8 +97,8 @@ TextureImporter:
         y: 1460
         width: 307
         height: 339
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .516723216, y: .113810942}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: ameba.attck_4
       rect:
@@ -117,8 +117,8 @@ TextureImporter:
         y: 1048
         width: 292
         height: 295
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .746152818, y: .12582387}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: ameba.attck_6
       rect:
@@ -127,8 +127,8 @@ TextureImporter:
         y: 1039
         width: 342
         height: 209
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .755201221, y: .156092301}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: ameba.attck_7
       rect:
@@ -137,8 +137,8 @@ TextureImporter:
         y: 1048
         width: 396
         height: 133
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .791707337, y: .191185057}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: ameba.attck_8
       rect:
@@ -147,8 +147,8 @@ TextureImporter:
         y: 1019
         width: 406
         height: 127
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .923622489, y: .722340047}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: ameba.attck_10
       rect:

@@ -73,9 +73,51 @@ public class Pathfinding : MonoBehaviour {
         }
     }
 
+    public bool CheckEmpty(Vector2 target)
+    {
+        Node nodoTarget = new Node();
+        foreach(Node node in nodeList)
+        {
+            if (node.position == target)
+                nodoTarget = node;
+        }
+
+        foreach(Node node in nodoTarget.nearNodes)
+        {
+            if (!node.visited)
+                return true;
+        }
+        return false;
+    }
+
 
     public Vector2 NextStep(Vector2 target, Vector2 origin)
     {
+        //Node nodeOrigin = new Node();  
+        //for (int i = 0; i < nodeList.Count; i++)
+        //{
+        //    nodeList[i].Reset();
+
+        //    if (nodeList[i].position == origin)
+        //        nodeOrigin = nodeList[i];
+        //}
+        //nodeOrigin.distance = 0;
+
+        //LoadEnemiesPosition(GameObject.FindGameObjectWithTag("Enemies").GetComponent<EnemyGenerator>().enemies);
+
+        //if (!CheckEmpty(target))
+        //{
+        //    print("TARGET");
+        //    return Vector2.zero; 
+        //}
+
+        //if (!CheckEmpty(origin))
+        //{
+        //    print("ORIGIN");
+        //    return Vector2.zero;
+        //}
+
+
         List<Node> tmp = CalculatePath(target, origin);
 
         if (tmp.Count > 1)
@@ -93,13 +135,15 @@ public class Pathfinding : MonoBehaviour {
     {
         List<Node> tmp = new List<Node>();
         List<Node> path = Path(target, origin);
-
-        Node node = path[path.Count-1];
-        tmp.Add(node);
-        while(node.prev != null)
+        if (path.Count != 0)
         {
-            node = node.prev;
+            Node node = path[path.Count - 1];
             tmp.Add(node);
+            while (node.prev != null)
+            {
+                node = node.prev;
+                tmp.Add(node);
+            }
         }
         return tmp;
     }
@@ -108,7 +152,8 @@ public class Pathfinding : MonoBehaviour {
     public List<Node> Path(Vector2 target, Vector2 origin)
     {
         List<Node> path = new List<Node>();
-        Node nodeOrigin = new Node();
+        Node nodeOrigin = new Node();        
+
         for(int i=0; i < nodeList.Count;i++)
         {
             nodeList[i].Reset();
@@ -118,7 +163,10 @@ public class Pathfinding : MonoBehaviour {
         }
         nodeOrigin.distance = 0;
 
-        while(nodeList.Count != 0)
+        LoadEnemiesPosition(GameObject.FindGameObjectWithTag("Enemies").GetComponent<EnemyGenerator>().enemies);
+
+        int attemp = 50;
+        while (attemp != 0)
         {
             foreach(Node node in nodeOrigin.nearNodes)
             {
@@ -154,7 +202,24 @@ public class Pathfinding : MonoBehaviour {
                 path.Add(nodeOrigin);
                 return path;
             }
+
+            attemp--;
         }
+        path.Clear();
         return path;
 	}
+
+    public void LoadEnemiesPosition(List<Base> enemies)
+    {
+        foreach(Base enemy in enemies)
+        {
+            foreach(Node node in nodeList)
+            {
+                if (enemy.Position == node.position)
+                {
+                    node.visited = true;
+                }
+            }
+        }
+    }
 }

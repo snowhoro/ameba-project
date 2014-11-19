@@ -49,7 +49,7 @@ public class DungeonGenerator : MonoBehaviour
     private GameObject player;
 	private GameObject stairs;
 
-    private List<GameObject> tileList;
+    public List<GameObject> tileList;
 
     private Tile[,] dungeonMatrix;
     private Rect[] rooms;
@@ -526,7 +526,7 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject wall_bot;
     public GameObject wall_top;
 
-    public GameObject prefab_wall2;
+    public GameObject[] prefab_wall2;
 
 	
 	public void SetWalls()
@@ -565,14 +565,14 @@ public class DungeonGenerator : MonoBehaviour
 					   && IsWall(new Vector2(x-1,y)))
 					{
 						//TOP LEFT RIGHT
-						Instantiate(floor_topLeftRight, new Vector2(x,y),Quaternion.identity);
+						tileList.Add((GameObject)Instantiate(floor_topLeftRight, new Vector2(x,y),Quaternion.identity));
 					}
 					else if( IsWall(new Vector2(x,y-1))
 					 && IsWall(new Vector2(x+1,y))
 					 && IsWall(new Vector2(x-1,y)))
 					{
 						//BOT LEFT RIGHT
-						Instantiate(floor_botLeftRight, new Vector2(x,y),Quaternion.identity);
+						tileList.Add((GameObject)Instantiate(floor_botLeftRight, new Vector2(x,y),Quaternion.identity));
 						
 					}
 					else if(IsWall(new Vector2(x,y+1)) 
@@ -581,14 +581,14 @@ public class DungeonGenerator : MonoBehaviour
 					   )
 					{
 						// TOP BOT LEFT
-						Instantiate(floor_topBotLeft, new Vector2(x,y),Quaternion.identity);
+						tileList.Add((GameObject)Instantiate(floor_topBotLeft, new Vector2(x,y),Quaternion.identity));
 					}
 					else if(IsWall(new Vector2(x,y+1)) 
 					   && IsWall(new Vector2(x,y-1))
 					   && IsWall(new Vector2(x+1,y)))
 					{
 						//TOP BOT RIGHT
-						Instantiate(floor_topBotRight, new Vector2(x,y),Quaternion.identity);
+						tileList.Add((GameObject)Instantiate(floor_topBotRight, new Vector2(x,y),Quaternion.identity));
 						
 					}
 
@@ -599,7 +599,7 @@ public class DungeonGenerator : MonoBehaviour
 					   && IsWall(new Vector2(x+1,y-1)))
 					{
 						//TOP LEFT    CORNER RIGHT BOT
-						Instantiate(floor_cornerRightBot, new Vector2(x,y),Quaternion.identity);
+						tileList.Add((GameObject)Instantiate(floor_cornerRightBot, new Vector2(x,y),Quaternion.identity));
 						
 					}
 					else if(IsWall(new Vector2(x,y+1)) 
@@ -607,7 +607,7 @@ public class DungeonGenerator : MonoBehaviour
 					        && IsWall(new Vector2(x-1,y-1)))
 					{
 						//TOP RIGHT   CORNER LEFT BOT
-						Instantiate(floor_cornerLeftBot, new Vector2(x,y),Quaternion.identity);
+						tileList.Add((GameObject)Instantiate(floor_cornerLeftBot, new Vector2(x,y),Quaternion.identity));
 						
 					}
 					else if(IsWall(new Vector2(x,y-1)) 
@@ -615,7 +615,7 @@ public class DungeonGenerator : MonoBehaviour
 					        && IsWall(new Vector2(x-1,y+1)))
 					{
 						//BOT RIGHT   CORNER LEFT TOP
-						Instantiate(floor_cornerLeftTop, new Vector2(x,y),Quaternion.identity);
+						tileList.Add((GameObject)Instantiate(floor_cornerLeftTop, new Vector2(x,y),Quaternion.identity));
 						
 					}
 					else if(IsWall(new Vector2(x,y-1)) 
@@ -623,7 +623,7 @@ public class DungeonGenerator : MonoBehaviour
 					        && IsWall(new Vector2(x+1,y+1)))
 					{
 						//BOT LEFT   CORNER RIGHT TOP
-						Instantiate(floor_cornerRightTop, new Vector2(x,y),Quaternion.identity);
+						tileList.Add((GameObject)Instantiate(floor_cornerRightTop, new Vector2(x,y),Quaternion.identity));
 						
 					}
 
@@ -634,42 +634,42 @@ public class DungeonGenerator : MonoBehaviour
 					        && IsWall(new Vector2(x,y-1)))
 					{
 						//TOP BOT
-						Instantiate(floor_topBot, new Vector2(x,y),Quaternion.identity);
+						tileList.Add((GameObject)Instantiate(floor_topBot, new Vector2(x,y),Quaternion.identity));
 						
 					}
 					else if(IsWall(new Vector2(x+1,y)) 
 					        && IsWall(new Vector2(x-1,y)))
 					{
 						//LEFT RIGHT
-						Instantiate(floor_leftRight, new Vector2(x,y),Quaternion.identity);
+						tileList.Add((GameObject)Instantiate(floor_leftRight, new Vector2(x,y),Quaternion.identity));
 						
 					}
 					else if(IsWall(new Vector2(x,y+1)) 
 					        && IsWall(new Vector2(x-1,y)))
 					{
 						//TOP LEFT
-						Instantiate(floor_topLeft, new Vector2(x,y),Quaternion.identity);
+						tileList.Add((GameObject)Instantiate(floor_topLeft, new Vector2(x,y),Quaternion.identity));
 						
 					}
 					else if(IsWall(new Vector2(x,y+1)) 
 					        && IsWall(new Vector2(x+1,y)))
 					{
 						//TOP RIGHT
-						Instantiate(floor_topRight, new Vector2(x,y),Quaternion.identity);
+						tileList.Add((GameObject)Instantiate(floor_topRight, new Vector2(x,y),Quaternion.identity));
 						
 					}
 					else if(IsWall(new Vector2(x,y-1)) 
 					        && IsWall(new Vector2(x+1,y)))
 					{
 						//BOT RIGHT
-						Instantiate(floor_botRight, new Vector2(x,y),Quaternion.identity);
+						tileList.Add((GameObject)Instantiate(floor_botRight, new Vector2(x,y),Quaternion.identity));
 						
 					}
 					else if(IsWall(new Vector2(x,y-1)) 
 					        && IsWall(new Vector2(x-1,y)))
 					{
 						//BOT LEFT
-						Instantiate(floor_botLeft, new Vector2(x,y),Quaternion.identity);
+						tileList.Add((GameObject)Instantiate(floor_botLeft, new Vector2(x,y),Quaternion.identity));
 						
 					}
 
@@ -678,25 +678,25 @@ public class DungeonGenerator : MonoBehaviour
 					else if(IsWall(new Vector2(x,y+1)))
 					{
 						//TOP
-						Instantiate(floor_top, new Vector2(x,y),Quaternion.identity);
+						tileList.Add((GameObject)Instantiate(floor_top, new Vector2(x,y),Quaternion.identity));
 						
 					}
 					else if(IsWall(new Vector2(x,y-1)))
 					{
 						//BOT
-						Instantiate(floor_bot, new Vector2(x,y),Quaternion.identity);
+						tileList.Add((GameObject)Instantiate(floor_bot, new Vector2(x,y),Quaternion.identity));
 						
 					}
 					else if(IsWall(new Vector2(x+1,y)))
 					{
 						//RIGHT
-						Instantiate(floor_right, new Vector2(x,y),Quaternion.identity);
+						tileList.Add((GameObject)Instantiate(floor_right, new Vector2(x,y),Quaternion.identity));
 						
 					}
 					else if(IsWall(new Vector2(x-1,y)))
 					{
 						//LEFT
-						Instantiate(floor_left, new Vector2(x,y),Quaternion.identity);
+						tileList.Add((GameObject)Instantiate(floor_left, new Vector2(x,y),Quaternion.identity));
 					}
                 }
 
@@ -716,7 +716,7 @@ public class DungeonGenerator : MonoBehaviour
 					else if (IsFloor(new Vector2(x, y - 1)) /*&& !IsFloor(new Vector2(x, y + 1))*/)
                     {
                         //WALL
-                        Instantiate(prefab_wall2, new Vector2(x,y),Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(prefab_wall2[Random.Range(0,prefab_wall2.Length)], new Vector2(x,y),Quaternion.identity));
 
                     }
 
@@ -732,7 +732,7 @@ public class DungeonGenerator : MonoBehaviour
                             && IsFloor( new Vector2(x - 1, y - 1)))))
                     {
                         // BOT LEFT RIGHT
-                        Instantiate(wall_botLeftRight, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_botLeftRight, new Vector2(x, y), Quaternion.identity));
                     }
 
                     else if ((IsFloor( new Vector2(x - 1, y))
@@ -744,7 +744,7 @@ public class DungeonGenerator : MonoBehaviour
                             && IsFloor( new Vector2(x, y + 1)))
                     {
                         //TOP LEFT RIGHT
-                        Instantiate(wall_topLeftRight, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_topLeftRight, new Vector2(x, y), Quaternion.identity));
                     }
 
 
@@ -757,7 +757,7 @@ public class DungeonGenerator : MonoBehaviour
                             )
                     {
                         //TOP BOT LEFT
-                        Instantiate(wall_topBotLeft, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_topBotLeft, new Vector2(x, y), Quaternion.identity));
                     }
 
                     else if (IsFloor( new Vector2(x, y + 1))
@@ -769,7 +769,7 @@ public class DungeonGenerator : MonoBehaviour
                             )
                     {
                         //TOP BOT RIGHT
-                        Instantiate(wall_topBotRight, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_topBotRight, new Vector2(x, y), Quaternion.identity));
                     }
 
                     else if (IsWall( new Vector2(x, y - 1))
@@ -777,7 +777,7 @@ public class DungeonGenerator : MonoBehaviour
                         && IsFloor( new Vector2(x, y + 1)))
                     {
                         // BOT TOP
-                        Instantiate(wall_topBot, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_topBot, new Vector2(x, y), Quaternion.identity));
                     }
 
 
@@ -790,7 +790,7 @@ public class DungeonGenerator : MonoBehaviour
                         )
                     {
                         // LEFT RIGHT
-                        Instantiate(wall_leftRight, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_leftRight, new Vector2(x, y), Quaternion.identity));
                     }
 
 
@@ -802,7 +802,7 @@ public class DungeonGenerator : MonoBehaviour
                         )
                     {
                         // BOT RIGHT
-                        Instantiate(wall_botRight, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_botRight, new Vector2(x, y), Quaternion.identity));
                     }
 
                     else if (IsWall( new Vector2(x, y - 1))
@@ -812,7 +812,7 @@ public class DungeonGenerator : MonoBehaviour
                         && IsFloor( new Vector2(x - 1, y - 1)))))
                     {
                         // BOT LEFT
-                        Instantiate(wall_botLeft, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_botLeft, new Vector2(x, y), Quaternion.identity));
                     }
 
                     else if (IsFloor( new Vector2(x, y + 1))
@@ -821,7 +821,7 @@ public class DungeonGenerator : MonoBehaviour
                         && IsFloor( new Vector2(x + 1, y - 1)))))
                     {
                         // TOP RIGHT
-                        Instantiate(wall_topRight, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_topRight, new Vector2(x, y), Quaternion.identity));
                     }
 
                     else if (IsFloor( new Vector2(x, y + 1))
@@ -830,7 +830,7 @@ public class DungeonGenerator : MonoBehaviour
                     && IsFloor( new Vector2(x - 1, y - 1)))))
                     {
                         // TOP LEFT
-                        Instantiate(wall_topLeft, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_topLeft, new Vector2(x, y), Quaternion.identity));
                     }
 
 
@@ -839,20 +839,20 @@ public class DungeonGenerator : MonoBehaviour
                     && IsFloor( new Vector2(x, y - 2)))
                     {
                         // BOT 
-                        Instantiate(wall_bot, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_bot, new Vector2(x, y), Quaternion.identity));
                     }
                     else if (IsWall( new Vector2(x + 1 , y))
                     && IsFloor( new Vector2(x +1, y - 1 )))
                     {
                         //RIGHT
-                        Instantiate(wall_right, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_right, new Vector2(x, y), Quaternion.identity));
                     }
 
                     else if (IsWall( new Vector2(x - 1, y))
                              && IsFloor( new Vector2(x - 1, y - 1)))
                     {
                         //LEFT
-                        Instantiate(wall_left, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_left, new Vector2(x, y), Quaternion.identity));
                     }
 
 
@@ -863,14 +863,14 @@ public class DungeonGenerator : MonoBehaviour
                        && IsFloor( new Vector2(x - 1, y)))
                     {
                         //TOP LEFT RIGHT
-                        Instantiate(wall_topLeftRight, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_topLeftRight, new Vector2(x, y), Quaternion.identity));
                     }
                     else if (IsFloor( new Vector2(x, y - 1))
                      && IsFloor( new Vector2(x + 1, y))
                      && IsFloor( new Vector2(x - 1, y)))
                     {
                         //BOT LEFT RIGHT
-                        Instantiate(wall_botLeftRight, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_botLeftRight, new Vector2(x, y), Quaternion.identity));
 
                     }
                     else if (IsFloor( new Vector2(x, y + 1))
@@ -879,14 +879,14 @@ public class DungeonGenerator : MonoBehaviour
                        )
                     {
                         // TOP BOT LEFT
-                        Instantiate(wall_topBotLeft, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_topBotLeft, new Vector2(x, y), Quaternion.identity));
                     }
                     else if (IsFloor( new Vector2(x, y + 1))
                        && IsFloor( new Vector2(x, y - 1))
                        && IsFloor( new Vector2(x + 1, y)))
                     {
                         //TOP BOT RIGHT
-                        Instantiate(wall_topBotRight, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_topBotRight, new Vector2(x, y), Quaternion.identity));
 
                     }
 
@@ -898,7 +898,7 @@ public class DungeonGenerator : MonoBehaviour
                        && IsFloor( new Vector2(x + 1, y - 1)))
                     {
                         //TOP LEFT    CORNER RIGHT BOT
-                        Instantiate(wall_cornerRightBot, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_cornerRightBot, new Vector2(x, y), Quaternion.identity));
 
                     }
                     else if (IsFloor( new Vector2(x, y + 1))
@@ -906,7 +906,7 @@ public class DungeonGenerator : MonoBehaviour
                             && IsFloor( new Vector2(x - 1, y - 1)))
                     {
                         //TOP RIGHT   CORNER LEFT BOT
-                        Instantiate(wall_cornerLeftBot, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_cornerLeftBot, new Vector2(x, y), Quaternion.identity));
 
                     }
                     else if (IsFloor( new Vector2(x, y - 1))
@@ -914,7 +914,7 @@ public class DungeonGenerator : MonoBehaviour
                             && IsFloor( new Vector2(x - 1, y + 1)))
                     {
                         //BOT RIGHT   CORNER LEFT TOP
-                        Instantiate(wall_cornerLeftTop, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_cornerLeftTop, new Vector2(x, y), Quaternion.identity));
 
                     }
                     else if (IsFloor( new Vector2(x, y - 1))
@@ -922,7 +922,7 @@ public class DungeonGenerator : MonoBehaviour
                             && IsFloor( new Vector2(x + 1, y + 1)))
                     {
                         //BOT LEFT   CORNER RIGHT TOP
-                        Instantiate(wall_cornerRightTop, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_cornerRightTop, new Vector2(x, y), Quaternion.identity));
 
                     }
 
@@ -935,42 +935,42 @@ public class DungeonGenerator : MonoBehaviour
                             && IsFloor( new Vector2(x, y - 1)))
                     {
                         //TOP BOT
-                        Instantiate(wall_topBot, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_topBot, new Vector2(x, y), Quaternion.identity));
 
                     }
                     else if (IsFloor( new Vector2(x + 1, y))
                             && IsFloor( new Vector2(x - 1, y)))
                     {
                         //LEFT RIGHT
-                        Instantiate(wall_leftRight, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_leftRight, new Vector2(x, y), Quaternion.identity));
 
                     }
                     else if (IsFloor( new Vector2(x, y + 1))
                             && IsFloor( new Vector2(x - 1, y)))
                     {
                         //TOP LEFT
-                        Instantiate(wall_topLeft, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_topLeft, new Vector2(x, y), Quaternion.identity));
 
                     }
                     else if (IsFloor( new Vector2(x, y + 1))
                             && IsFloor( new Vector2(x + 1, y)))
                     {
                         //TOP RIGHT
-                        Instantiate(wall_topRight, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_topRight, new Vector2(x, y), Quaternion.identity));
 
                     }
                     else if (IsFloor( new Vector2(x, y - 1))
                             && IsFloor( new Vector2(x + 1, y)))
                     {
                         //BOT RIGHT
-                        Instantiate(wall_botRight, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_botRight, new Vector2(x, y), Quaternion.identity));
 
                     }
                     else if (IsFloor( new Vector2(x, y - 1))
                             && IsFloor( new Vector2(x - 1, y)))
                     {
                         //BOT LEFT
-                        Instantiate(wall_botLeft, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_botLeft, new Vector2(x, y), Quaternion.identity));
 
                     }
 
@@ -979,25 +979,25 @@ public class DungeonGenerator : MonoBehaviour
                     else if (IsFloor( new Vector2(x, y + 1)))
                     {
                         //TOP
-                        Instantiate(wall_top, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_top, new Vector2(x, y), Quaternion.identity));
 
                     }
                     else if (IsFloor( new Vector2(x, y - 1)))
                     {
                         //BOT
-                        Instantiate(wall_bot, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_bot, new Vector2(x, y), Quaternion.identity));
 
                     }
                     else if (IsFloor( new Vector2(x + 1, y)))
                     {
                         //RIGHT
-                        Instantiate(wall_right, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_right, new Vector2(x, y), Quaternion.identity));
 
                     }
                     else if (IsFloor( new Vector2(x - 1, y)))
                     {
                         //LEFT
-                        Instantiate(wall_left, new Vector2(x, y), Quaternion.identity);
+                        tileList.Add((GameObject)Instantiate(wall_left, new Vector2(x, y), Quaternion.identity));
                     }
                 }
                 #endregion

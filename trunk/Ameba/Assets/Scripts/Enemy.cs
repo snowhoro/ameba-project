@@ -3,19 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 public class Enemy : Base
 {
-    private bool moving = false;
-    private bool attacking = false;
+    protected bool moving = false;
+    protected bool attacking = false;
 
-    private Vector3 target;
-    private Vector2 nextStep;
-    private float moveSpeed = 3.0f;
+    public Vector3 target;
+    protected Vector2 nextStep;
+    protected float moveSpeed = 3.0f;
 
-    private float left;
-    private float top;
-    public Texture2D blackBar;
-    public Texture2D redBar;
-    public float healthBarWidth;
-    public float healthBarHeight;
+    protected float left;
+    protected float top;
 
     void Start()
     {
@@ -23,28 +19,19 @@ public class Enemy : Base
         moving = false;
     }
 
-    void OnGUI()
-    {
-        
-        Vector3 healthBarWorldPosition = transform.position + new Vector3(0.0f, 0.5f, 0.0f);
-        Vector3 healthBarScreenPosition = Camera.main.WorldToScreenPoint(healthBarWorldPosition);
-
-        left = healthBarScreenPosition.x - (healthBarWidth / 2);
-        top = Screen.height - (healthBarScreenPosition.y);
-
-        GUI.DrawTexture(new Rect(left, top, healthBarWidth, healthBarHeight), blackBar, ScaleMode.StretchToFill);
-        GUI.DrawTexture(new Rect(left, top, (HitPoints * healthBarWidth) / MaxHitPoints, healthBarHeight), redBar, ScaleMode.StretchToFill);
-        
-    }
-
     void Update()
     {
         if(Turns.instance.StartTurn(this) && !moving && !attacking )
         {
+
             Attack();
             Move();
-            if(nextStep == Vector2.zero)
+
+            if (nextStep == Vector2.zero)
+            {
                 Turns.instance.EndTurn(this);
+                Stamina = MaxStamina;
+            }
         }
         
         if (moving && transform.position == target)
@@ -56,10 +43,11 @@ public class Enemy : Base
         if (HitPoints <= 1)
         {
             Turns.instance.DeleteEnemy(this);
+            GameObject.FindGameObjectWithTag("Enemies").GetComponent<EnemyGenerator>().DeleteEnemy(this);
             Destroy(this.gameObject);
         }
 
-        if (Stamina == 0)
+        if (!moving && Stamina == 0)
         {
             Turns.instance.EndTurn(this);
             Stamina = MaxStamina;
@@ -79,7 +67,7 @@ public class Enemy : Base
             Stamina -= MoveCost;
 
             nextStep = Pathfinding.instance.NextStep(Player.instance.Position, transform.position);
-
+            //print(nextStep);
             if (nextStep != Vector2.zero)
             {
                 moving = true;
