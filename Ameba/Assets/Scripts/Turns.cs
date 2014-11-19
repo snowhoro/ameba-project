@@ -44,13 +44,18 @@ public class Turns : MonoBehaviour {
     void Update()
     {
         if (turnList.Count == 0)
+        {
+            turnList.Clear();
             LoadTurnList();
+        }
     }
 
     private void LoadTurnList()
     {
         turnList.Add(Player.instance);
-        turnList.AddRange(nearbyEnemies);
+
+        if(nearbyEnemies.Count > 0)
+            turnList.AddRange(nearbyEnemies);
     }
 
     public void AddEnemy(Base enemy)
@@ -61,6 +66,7 @@ public class Turns : MonoBehaviour {
     public void DeleteEnemy(Base enemy)
     {
         nearbyEnemies.Remove(enemy);
+        turnList.Remove(enemy);
     }
 
     public bool StartTurn(Base enemy)
