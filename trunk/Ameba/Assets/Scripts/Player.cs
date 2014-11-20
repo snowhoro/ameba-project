@@ -52,14 +52,13 @@ public class Player : Base
         Position = transform.position;
     }
 
-   
-
     void Update()
     {
         moveX = moveY = 0;
         if (Turns.instance.StartTurn(this) && !moving && !attacking)
         {
 			SkipTurn();
+            ShowInventory();
             Attack();
             Move();
         }        
@@ -81,6 +80,15 @@ public class Player : Base
     void FixedUpdate()
     {
         transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
+    }
+
+    private void ShowInventory ()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Inventory temp = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
+            temp.show_inv = !temp.show_inv;
+        }
     }
 
 	public void SkipTurn()
@@ -144,7 +152,7 @@ public class Player : Base
 				if (hit.collider.tag == "Enemy" && !hit.collider.isTrigger)
 				{
 					anim.SetTrigger("Attack");
-					Combat.DealDamage(hit.collider.GetComponent<Base>(),this);
+					Combat.instance.DealDamage(hit.collider.GetComponent<Base>(),this);
 					Stamina -= AttackCost;
 				}
 			}
@@ -152,9 +160,4 @@ public class Player : Base
 
 
     }
-
-	private void AttackStamina()
-	{
-		//Stamina -= AttackCost;
-	}
 }

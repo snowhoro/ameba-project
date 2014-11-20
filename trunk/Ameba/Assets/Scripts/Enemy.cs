@@ -13,6 +13,8 @@ public class Enemy : Base
     protected float left;
     protected float top;
 
+    public GameObject[] drops;
+
     void Start()
     {
         target = transform.position;
@@ -42,7 +44,9 @@ public class Enemy : Base
 
         if (HitPoints <= 1)
         {
+
             Turns.instance.DeleteEnemy(this);
+            Drop();
             GameObject.FindGameObjectWithTag("Enemies").GetComponent<EnemyGenerator>().DeleteEnemy(this);
             Destroy(this.gameObject);
         }
@@ -104,7 +108,20 @@ public class Enemy : Base
             if (attk)
             {
                 Stamina -= AttackCost;
-                Combat.DealDamage(Player.instance, this);
+                Combat.instance.DealDamage(Player.instance, this);
+            }
+        }
+    }
+
+    public void Drop()
+    {
+        if (drops != null && drops.Length > 0)
+        {
+            int rnd = Random.Range(0, drops.Length);
+
+            if (drops[rnd].GetComponent<Item>().dropRate >= Random.Range(0, 100))
+            {
+                Instantiate(drops[rnd], transform.position, Quaternion.identity);
             }
         }
     }
