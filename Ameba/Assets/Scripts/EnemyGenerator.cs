@@ -22,7 +22,7 @@ public class EnemyGenerator : MonoBehaviour
         foreach(Rect room in rooms)
         {
             int nroEnemies = Random.Range(5, 5);
-            nroEnemies = 10;
+            nroEnemies = 1;
             for (int i = 0; i < nroEnemies; i++)
             {
                 int posX;
